@@ -3,11 +3,15 @@ package com.codemind.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codemind.Repo.EmployeeRepo;
 import com.codemind.model.Employee;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -54,6 +58,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public Employee getEmployeeById(Long id) {
 		Optional<Employee> emp = employeeRepo.findById(id);
 		return emp.orElse(null);
+	}
+
+	@Override
+	public Page<Employee> getEmployeesByPagination(int page, int size) {
+		Pageable pageable = PageRequest.of(page, size);
+		return employeeRepo.findAll(pageable);
+	}
+ 
+	@Override
+	public List<Employee> getEmployeeBySorting(String sortBy) {
+		Sort sort = Sort.by(sortBy);
+		return employeeRepo.findAll(sort);
 	}
 
 }

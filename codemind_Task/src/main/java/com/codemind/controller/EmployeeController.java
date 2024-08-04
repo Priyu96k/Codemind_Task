@@ -27,10 +27,6 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeServiceImpl employeeServiceImpl;
 
-//	<dependency>
-//	<groupId>org.springframework.boot</groupId>
-//	<artifactId>spring-boot-starter-security</artifactId>
-//</dependency>
 
 	@PostMapping("") // For Save Employee in Database
 	public String createEmployee(@RequestBody Employee employee) {
@@ -40,6 +36,7 @@ public class EmployeeController {
 
 	@GetMapping("") // Get the All Employees List
 	public List<Employee> readAllEmployee() {
+		
 		return employeeServiceImpl.readAllEmployee();
 	}
 
@@ -51,6 +48,7 @@ public class EmployeeController {
 
 	@DeleteMapping("/{id}") // delete the employee
 	public String deleteEmployee(@PathVariable Long id) {
+		
 		if (employeeServiceImpl.deleteEmployee(id)) {
 			return "Employee Deleted Successfully...";
 		} else {
@@ -58,7 +56,8 @@ public class EmployeeController {
 		}
 	}
 	
-	@GetMapping("/{id}")
+	
+	@GetMapping("/{id}") // get employee by id for updating
 	public Employee geEmployeeById(@PathVariable Long id) {
 		return employeeServiceImpl.getEmployeeById(id);
 	}

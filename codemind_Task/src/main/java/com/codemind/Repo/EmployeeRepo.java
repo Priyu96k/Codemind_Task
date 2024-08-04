@@ -7,5 +7,5 @@ import com.codemind.model.Employee;
 
 @Repository
 public interface EmployeeRepo extends JpaRepository<Employee, Long> {
-
+	
 }
